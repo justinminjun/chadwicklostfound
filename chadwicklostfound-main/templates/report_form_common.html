@@ -1,0 +1,41 @@
+<style>
+   imageInput_lost{
+   cursor:pointer
+   }
+   imageInput_found{
+   cursor:pointer
+   }
+</style>
+<div class="form-floating mb-3">
+   <input name="title" type="text" class="form-control" placeholder="Item Title" required>
+   <label>Item Title</label>
+</div>
+<div class="form-floating mb-3">
+   <input name="lost_date" type="date" class="form-control" placeholder="Date (Optional)">
+   <label>Date (Optional)</label>
+</div>
+<div class="form-floating mb-3">
+   <textarea name="description" class="form-control" placeholder="Description" style="height: 100px;" required></textarea>
+   <label>Description</label>
+</div>
+<div class="mb-3 text-center position-relative">
+   <label for="imageInput_{{ status }}" class="btn-upload">
+   <i class="bi bi-camera me-1"></i> Take Photo or Choose Image
+   </label>
+   <!-- LOST item image input -->
+   {% if status == 'lost' %}
+   <input type="file" id="imageInput_lost" name="image" accept="image/*" onchange="previewImage(event, 'lost')" hidden>
+   <div id="imagePreviewWrapper_lost" class="d-inline-block position-relative" style="display: none !important;">
+      <img id="preview_lost" class="image-preview img-fluid mx-auto d-block" alt="Image Preview">
+      <button type="button" class="btn btn-sm btn-close position-absolute top-0 end-0 m-2 bg-white border-0"
+         onclick="removeImage('lost')" aria-label="Remove image"></button>
+   </div>
+   {% elif status == 'found' %}
+   <input type="file" id="imageInput_found" name="image" accept="image/*" onchange="previewImage(event, 'found')" hidden>
+   <div id="imagePreviewWrapper_found" class="d-inline-block position-relative" style="display: none !important;">
+      <img id="preview_found" class="image-preview img-fluid mx-auto d-block" alt="Image Preview">
+      <button type="button" class="btn btn-sm btn-close position-absolute top-0 end-0 m-2 bg-white border-0"
+         onclick="removeImage('found')" aria-label="Remove image"></button>
+   </div>
+   {% endif %}
+</div>
